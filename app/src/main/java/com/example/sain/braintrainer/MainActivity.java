@@ -81,19 +81,24 @@ public class MainActivity extends AppCompatActivity {
         TextView question = findViewById(R.id.textViewQuestion);
         question.setText(String.format(Locale.getDefault(), "%d + %d", a, b));
 
-        TextView option;
+        TextView textViewOption;
+        int option;
 
         int correctOption = random.nextInt(4);
 
         for (int i = 0; i < 4; i++) {
-            option = findViewById(getResources().getIdentifier(
+            textViewOption = findViewById(getResources().getIdentifier(
                     "textViewOption" + Integer.toString(i + 1), "id", getPackageName()));
             if (i == correctOption) {
-                option.setText(String.format(Locale.getDefault(), "%d", a + b));
-                option.setTag("1");
+                textViewOption.setText(String.format(Locale.getDefault(), "%d", a + b));
+                textViewOption.setTag("1");
             } else {
-                option.setText(String.format(Locale.getDefault(), "%d", random.nextInt(39)));
-                option.setTag("0");
+                do {
+                    option = random.nextInt(39);
+                }
+                while (option == (a + b));
+                textViewOption.setText(String.format(Locale.getDefault(), "%d", option));
+                textViewOption.setTag("0");
             }
         }
     }
