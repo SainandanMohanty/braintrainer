@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         countDownTimer = new CountDownTimer(30100, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                timer.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000).concat("s"));
+                timer.setText(String.format(Locale.getDefault(), "%ds", millisUntilFinished / 1000));
             }
 
             @Override
