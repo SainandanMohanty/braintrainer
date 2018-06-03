@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView timer = findViewById(R.id.textViewTimer);
         timer.setTag("1");
-        countDownTimer = new CountDownTimer(30000, 1000) {
+        countDownTimer = new CountDownTimer(30100, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timer.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000).concat("s"));
@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                timer.setText("0s");
                 timer.setTag("0");
                 status.setText("Time's up!!");
             }
