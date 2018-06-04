@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
 
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         countDownTimer = new CountDownTimer(30100, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                timer.setText(String.format(Locale.getDefault(), "%ds", millisUntilFinished / 1000));
+                timer.setText(String.valueOf(millisUntilFinished / 1000).concat("s"));
             }
 
             @Override
@@ -85,19 +86,21 @@ public class MainActivity extends AppCompatActivity {
         int option;
 
         int correctOption = random.nextInt(4);
+        ArrayList<Integer> optionArrayList = new ArrayList<>();
 
         for (int i = 0; i < 4; i++) {
             textViewOption = findViewById(getResources().getIdentifier(
                     "textViewOption" + Integer.toString(i + 1), "id", getPackageName()));
             if (i == correctOption) {
-                textViewOption.setText(String.format(Locale.getDefault(), "%d", a + b));
+                textViewOption.setText(String.valueOf(a + b));
                 textViewOption.setTag("1");
             } else {
                 do {
                     option = random.nextInt(39);
                 }
-                while (option == (a + b));
-                textViewOption.setText(String.format(Locale.getDefault(), "%d", option));
+                while (option == (a + b) || optionArrayList.contains(option));
+                optionArrayList.add(option);
+                textViewOption.setText(String.valueOf(option));
                 textViewOption.setTag("0");
             }
         }
